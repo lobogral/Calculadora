@@ -6,16 +6,13 @@ import logica.opr.OprPunto;
 import logica.opr.OprIgual;
 import logica.opr.OprDigito;
 import logica.opr.OprOperador;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
@@ -46,14 +43,9 @@ public class Ventana extends JFrame implements ActionListener {
             System.out.println("No se puede implementar LookAndFeel");
         }
         //Agrega label para mostrar resultados
-        LblDisplayExt lblDisplay = new LblDisplayExt();
-        lblDisplay.setBackground(new Color(255, 255, 255));
-        lblDisplay.setFont(new Font("Tahoma", 0, 17)); // NOI18N
-        lblDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
-        lblDisplay.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
-        lblDisplay.setOpaque(true);
-        getContentPane().add(lblDisplay);
-        lblDisplay.setBounds(30, 30, 270, 40);
+        LblDisplayExt lblDisplayExt = new LblDisplayExt();
+        getContentPane().add(lblDisplayExt.getLblDisplay());
+        
         //Agrega el panel de los botones
         JPanel pnlBotones = new JPanel();
         pnlBotones.setLayout(new GridLayout(4, 4, 3, 3));
@@ -67,22 +59,22 @@ public class Ventana extends JFrame implements ActionListener {
                                  "=","0",".","+"};
         
         Oprimir[] oprimir = new Oprimir[16];
-        oprimir[0] = new OprDigito(7, lblDisplay);
-        oprimir[1] = new OprDigito(8, lblDisplay);
-        oprimir[2] = new OprDigito(9, lblDisplay);
-        oprimir[3] = new OprOperador('/', lblDisplay, operaciones);
-        oprimir[4] = new OprDigito(4, lblDisplay);
-        oprimir[5] = new OprDigito(5, lblDisplay);
-        oprimir[6] = new OprDigito(6, lblDisplay);
-        oprimir[7] = new OprOperador('*', lblDisplay, operaciones);
-        oprimir[8] = new OprDigito(1, lblDisplay);
-        oprimir[9] = new OprDigito(2, lblDisplay);
-        oprimir[10] = new OprDigito(3, lblDisplay);
-        oprimir[11] = new OprOperador('-', lblDisplay, operaciones);
-        oprimir[12] = new OprIgual(lblDisplay, operaciones);
-        oprimir[13] = new OprDigito(0, lblDisplay);
-        oprimir[14] = new OprPunto(lblDisplay);
-        oprimir[15] = new OprOperador('+', lblDisplay, operaciones);
+        oprimir[0] = new OprDigito(7, lblDisplayExt);
+        oprimir[1] = new OprDigito(8, lblDisplayExt);
+        oprimir[2] = new OprDigito(9, lblDisplayExt);
+        oprimir[3] = new OprOperador('/', lblDisplayExt, operaciones);
+        oprimir[4] = new OprDigito(4, lblDisplayExt);
+        oprimir[5] = new OprDigito(5, lblDisplayExt);
+        oprimir[6] = new OprDigito(6, lblDisplayExt);
+        oprimir[7] = new OprOperador('*', lblDisplayExt, operaciones);
+        oprimir[8] = new OprDigito(1, lblDisplayExt);
+        oprimir[9] = new OprDigito(2, lblDisplayExt);
+        oprimir[10] = new OprDigito(3, lblDisplayExt);
+        oprimir[11] = new OprOperador('-', lblDisplayExt, operaciones);
+        oprimir[12] = new OprIgual(lblDisplayExt, operaciones);
+        oprimir[13] = new OprDigito(0, lblDisplayExt);
+        oprimir[14] = new OprPunto(lblDisplayExt);
+        oprimir[15] = new OprOperador('+', lblDisplayExt, operaciones);
         
         for (int i=0; i<botones.length; i++) {    
             botones[i] = new JButtonExt(oprimir[i]);
@@ -92,8 +84,7 @@ public class Ventana extends JFrame implements ActionListener {
             pnlBotones.add(botones[i]);
         }
         //Hace otras operaciones
-        this.setBounds(200, 200, 345, 350);
-        lblDisplay.setText("0");                
+        this.setBounds(200, 200, 345, 350);              
         this.setVisible(true);
         
     }
