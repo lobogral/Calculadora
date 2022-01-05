@@ -1,13 +1,13 @@
 package logica.opr;
 
 import logica.IntDisplay;
-import logica.Oprimir;
+import logica.Click;
 
-public class OprPunto implements Oprimir{
+public class ClickPunto implements Click{
 
     private final IntDisplay display;
 
-    public OprPunto(IntDisplay display){
+    public ClickPunto(IntDisplay display){
         this.display = display;
     }
     
@@ -18,5 +18,10 @@ public class OprPunto implements Oprimir{
             numero = numero + ".";
             display.setText(numero);            
         }
+    }
+
+    @Override
+    public String getSimbolo() {
+        return ".";
     }
 }

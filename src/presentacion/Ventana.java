@@ -1,20 +1,19 @@
 package presentacion;
 
 import logica.Operaciones;
-import logica.Oprimir;
-import logica.opr.OprPunto;
-import logica.opr.OprIgual;
-import logica.opr.OprDigito;
-import logica.opr.OprOperador;
-import java.awt.Font;
+import logica.opr.ClickPunto;
+import logica.opr.ClickIgual;
+import logica.opr.ClickDigito;
+import logica.opr.ClickOperador;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
+import logica.Click;
 
 public class Ventana extends JFrame implements ActionListener {
     
@@ -39,7 +38,10 @@ public class Ventana extends JFrame implements ActionListener {
                     break;
                 }
             }
-        } catch (Exception ex) {
+        } catch (ClassNotFoundException 
+                 | IllegalAccessException 
+                 | InstantiationException 
+                 | UnsupportedLookAndFeelException ex) {
             System.out.println("No se puede implementar LookAndFeel");
         }
         //Agrega label para mostrar resultados
@@ -51,37 +53,28 @@ public class Ventana extends JFrame implements ActionListener {
         pnlBotones.setLayout(new GridLayout(4, 4, 3, 3));
         getContentPane().add(pnlBotones);
         pnlBotones.setBounds(30, 90, 270, 200);
+        
         //Coloca los botones
-        JButton[] botones = new JButton[16];
-        String[] textoBotones = {"7","8","9","/",
-                                 "4","5","6","*",
-                                 "1","2","3","-", 
-                                 "=","0",".","+"};
+        Click[] clicks = new Click[16];
+        clicks[0] = new ClickDigito(7, lblDisplayExt);
+        clicks[1] = new ClickDigito(8, lblDisplayExt);
+        clicks[2] = new ClickDigito(9, lblDisplayExt);
+        clicks[3] = new ClickOperador('/', lblDisplayExt, operaciones);
+        clicks[4] = new ClickDigito(4, lblDisplayExt);
+        clicks[5] = new ClickDigito(5, lblDisplayExt);
+        clicks[6] = new ClickDigito(6, lblDisplayExt);
+        clicks[7] = new ClickOperador('*', lblDisplayExt, operaciones);
+        clicks[8] = new ClickDigito(1, lblDisplayExt);
+        clicks[9] = new ClickDigito(2, lblDisplayExt);
+        clicks[10] = new ClickDigito(3, lblDisplayExt);
+        clicks[11] = new ClickOperador('-', lblDisplayExt, operaciones);
+        clicks[12] = new ClickIgual(lblDisplayExt, operaciones);
+        clicks[13] = new ClickDigito(0, lblDisplayExt);
+        clicks[14] = new ClickPunto(lblDisplayExt);
+        clicks[15] = new ClickOperador('+', lblDisplayExt, operaciones);
         
-        Oprimir[] oprimir = new Oprimir[16];
-        oprimir[0] = new OprDigito(7, lblDisplayExt);
-        oprimir[1] = new OprDigito(8, lblDisplayExt);
-        oprimir[2] = new OprDigito(9, lblDisplayExt);
-        oprimir[3] = new OprOperador('/', lblDisplayExt, operaciones);
-        oprimir[4] = new OprDigito(4, lblDisplayExt);
-        oprimir[5] = new OprDigito(5, lblDisplayExt);
-        oprimir[6] = new OprDigito(6, lblDisplayExt);
-        oprimir[7] = new OprOperador('*', lblDisplayExt, operaciones);
-        oprimir[8] = new OprDigito(1, lblDisplayExt);
-        oprimir[9] = new OprDigito(2, lblDisplayExt);
-        oprimir[10] = new OprDigito(3, lblDisplayExt);
-        oprimir[11] = new OprOperador('-', lblDisplayExt, operaciones);
-        oprimir[12] = new OprIgual(lblDisplayExt, operaciones);
-        oprimir[13] = new OprDigito(0, lblDisplayExt);
-        oprimir[14] = new OprPunto(lblDisplayExt);
-        oprimir[15] = new OprOperador('+', lblDisplayExt, operaciones);
-        
-        for (int i=0; i<botones.length; i++) {    
-            botones[i] = new JButtonExt(oprimir[i]);
-            botones[i].setText(textoBotones[i]);
-            botones[i].setFont(new Font("Tahoma", 0, 17));
-            botones[i].addActionListener(this);
-            pnlBotones.add(botones[i]);
+        for (Click click : clicks) {
+            pnlBotones.add(new JButtonExt(click, this));
         }
         //Hace otras operaciones
         this.setBounds(200, 200, 345, 350);              

@@ -1,16 +1,16 @@
 package logica.opr;
 
 import logica.Operaciones;
-import logica.Oprimir;
 import logica.IntDisplay;
+import logica.Click;
 
-public class OprOperador implements Oprimir{
+public class ClickOperador implements Click{
 
     private final IntDisplay display;
     private final Operaciones operaciones;
     private final char operador;
 
-    public OprOperador(char operador, IntDisplay display, Operaciones operaciones){
+    public ClickOperador(char operador, IntDisplay display, Operaciones operaciones){
         this.display = display;
         this.operaciones = operaciones;
         this.operador = operador;
@@ -22,5 +22,10 @@ public class OprOperador implements Oprimir{
         operaciones.addOperando1(numero1);
         operaciones.addOperandor(operador);
         display.setText("0");
+    }
+
+    @Override
+    public String getSimbolo() {
+        return "" + operador;
     }
 }

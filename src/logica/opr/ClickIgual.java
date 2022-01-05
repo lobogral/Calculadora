@@ -1,15 +1,15 @@
 package logica.opr;
 
 import logica.Operaciones;
-import logica.Oprimir;
 import logica.IntDisplay;
+import logica.Click;
 
-public class OprIgual implements Oprimir{
+public class ClickIgual implements Click{
 
     private final IntDisplay display;
     private final Operaciones operaciones;
 
-    public OprIgual(IntDisplay display, Operaciones operaciones){
+    public ClickIgual(IntDisplay display, Operaciones operaciones){
         this.display = display;
         this.operaciones = operaciones;
     }
@@ -19,5 +19,10 @@ public class OprIgual implements Oprimir{
         float numero2 = Float.parseFloat(display.getText());
         float resultado = operaciones.operar(numero2);
         display.setText("" + resultado);
+    }
+
+    @Override
+    public String getSimbolo() {
+        return "=";
     }
 }

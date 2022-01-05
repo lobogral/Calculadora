@@ -1,14 +1,14 @@
 package logica.opr;
 
-import logica.Oprimir;
 import logica.IntDisplay;
+import logica.Click;
 
-public class OprDigito implements Oprimir{
+public class ClickDigito implements Click{
 
     private final IntDisplay display;
     private final int digitoBoton;
 
-    public OprDigito(int digitoBoton, IntDisplay display){
+    public ClickDigito(int digitoBoton, IntDisplay display){
         this.display = display;
         this.digitoBoton = digitoBoton;
     }
@@ -21,5 +21,10 @@ public class OprDigito implements Oprimir{
         }
         digitoAgregado = digitoAgregado + digitoBoton;
         display.setText(digitoAgregado);
+    }
+
+    @Override
+    public String getSimbolo() {
+        return "" + digitoBoton;
     }
 }
