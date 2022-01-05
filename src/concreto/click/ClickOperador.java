@@ -1,8 +1,8 @@
-package logica.opr;
+package concreto.click;
 
-import logica.Operaciones;
-import logica.IntDisplay;
-import logica.Click;
+import abstracto.logica.Operaciones;
+import abstracto.logica.IntDisplay;
+import abstracto.logica.Click;
 
 public class ClickOperador implements Click{
 

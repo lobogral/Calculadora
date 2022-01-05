@@ -1,9 +1,9 @@
-package presentacion;
+package abstracto.presentacion;
 
+import abstracto.logica.Click;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import logica.Click;
 
 public class JButtonExt extends JButton{
     
@@ -16,7 +16,7 @@ public class JButtonExt extends JButton{
         addActionListener(actionListener);
     }
     
-    public Click getOprimir(){
-        return oprimir;
+    public void ejecutar(){
+        oprimir.ejecutar();
     }
 }

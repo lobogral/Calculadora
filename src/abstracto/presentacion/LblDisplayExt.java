@@ -1,11 +1,11 @@
-package presentacion;
+package abstracto.presentacion;
 
+import abstracto.logica.IntDisplay;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import logica.IntDisplay;
 
 public class LblDisplayExt implements IntDisplay{
 

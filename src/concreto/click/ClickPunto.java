@@ -1,7 +1,7 @@
-package logica.opr;
+package concreto.click;
 
-import logica.IntDisplay;
-import logica.Click;
+import abstracto.logica.IntDisplay;
+import abstracto.logica.Click;
 
 public class ClickPunto implements Click{
 

@@ -1,4 +1,4 @@
-package logica;
+package abstracto.logica;
 
 public interface IntDisplay {
     public String getText();
