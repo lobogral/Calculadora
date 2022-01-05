@@ -1,25 +1,30 @@
+package presentacion;
+
+import logica.Operaciones;
+import logica.Oprimir;
+import logica.opr.OprPunto;
+import logica.opr.OprIgual;
+import logica.opr.OprDigito;
+import logica.opr.OprOperador;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-public class Presentacion extends JFrame implements ActionListener {
+public class Ventana extends JFrame implements ActionListener {
     
-    private JLabel lblDisplay;
-    private final Logica logica;
+    private final Operaciones operaciones;
 
-    public Presentacion(Logica logica) {
-        this.logica = logica;
+    public Ventana(Operaciones operaciones) {
+        this.operaciones = operaciones;
         initComponents();
     }
 
@@ -41,7 +46,7 @@ public class Presentacion extends JFrame implements ActionListener {
             System.out.println("No se puede implementar LookAndFeel");
         }
         //Agrega label para mostrar resultados
-        lblDisplay = new JLabel();
+        LblDisplayExt lblDisplay = new LblDisplayExt();
         lblDisplay.setBackground(new Color(255, 255, 255));
         lblDisplay.setFont(new Font("Tahoma", 0, 17)); // NOI18N
         lblDisplay.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -60,8 +65,27 @@ public class Presentacion extends JFrame implements ActionListener {
                                  "4","5","6","*",
                                  "1","2","3","-", 
                                  "=","0",".","+"};
-        for (int i=0; i<botones.length; i++) {
-            botones[i] = new JButton();
+        
+        Oprimir[] oprimir = new Oprimir[16];
+        oprimir[0] = new OprDigito(7, lblDisplay);
+        oprimir[1] = new OprDigito(8, lblDisplay);
+        oprimir[2] = new OprDigito(9, lblDisplay);
+        oprimir[3] = new OprOperador('/', lblDisplay, operaciones);
+        oprimir[4] = new OprDigito(4, lblDisplay);
+        oprimir[5] = new OprDigito(5, lblDisplay);
+        oprimir[6] = new OprDigito(6, lblDisplay);
+        oprimir[7] = new OprOperador('*', lblDisplay, operaciones);
+        oprimir[8] = new OprDigito(1, lblDisplay);
+        oprimir[9] = new OprDigito(2, lblDisplay);
+        oprimir[10] = new OprDigito(3, lblDisplay);
+        oprimir[11] = new OprOperador('-', lblDisplay, operaciones);
+        oprimir[12] = new OprIgual(lblDisplay, operaciones);
+        oprimir[13] = new OprDigito(0, lblDisplay);
+        oprimir[14] = new OprPunto(lblDisplay);
+        oprimir[15] = new OprOperador('+', lblDisplay, operaciones);
+        
+        for (int i=0; i<botones.length; i++) {    
+            botones[i] = new JButtonExt(oprimir[i]);
             botones[i].setText(textoBotones[i]);
             botones[i].setFont(new Font("Tahoma", 0, 17));
             botones[i].addActionListener(this);
@@ -76,37 +100,8 @@ public class Presentacion extends JFrame implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-        JButton boton = (JButton)(e.getSource());
-        DecimalFormat format = new DecimalFormat("#.######");
-        format.setDecimalSeparatorAlwaysShown(false);
-        
-        if("+-*/".contains(boton.getText())){
-            float numero1 = Float.parseFloat(lblDisplay.getText());
-            logica.addOperando1(numero1);
-            char operador = boton.getText().charAt(0);
-            logica.addOperandor(operador);
-            lblDisplay.setText("0");
-        } else if("=".contains(boton.getText())){
-            float numero2 = Float.parseFloat(lblDisplay.getText());
-            float resultado = logica.operacion(numero2);
-            lblDisplay.setText("" + format.format(resultado));
-        } else if("0123456789".contains(boton.getText())){
-            String numero = lblDisplay.getText();
-            if(numero.equals("0")){                      
-                numero = "";            
-            }
-            numero = numero + boton.getText();
-            lblDisplay.setText(numero);
-        } else if(".".contains(boton.getText())){
-            String numero = lblDisplay.getText();
-            if(!numero.contains(".")){
-                numero = numero + boton.getText();
-                lblDisplay.setText(numero);            
-            } else {
-                lblDisplay.setText("0");
-            }
-        }
+        JButtonExt btnExt = (JButtonExt)(e.getSource());
+        btnExt.getOprimir().ejecutar();
     }
     
 }
