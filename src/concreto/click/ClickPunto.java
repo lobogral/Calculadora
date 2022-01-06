@@ -12,16 +12,12 @@ public class ClickPunto implements Click{
     }
     
     @Override
-    public void ejecutar(){
+    public void ejecutar(String textoBoton){
         String numero = display.getText();
-        if(!numero.contains(".")){
-            numero = numero + ".";
+        if(!numero.contains(textoBoton)){
+            numero = numero + textoBoton;
             display.setText(numero);            
         }
     }
 
-    @Override
-    public String getSimbolo() {
-        return ".";
-    }
 }

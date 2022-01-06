@@ -1,6 +1,5 @@
 package abstracto.logica;
 
 public interface Click {
-    public void ejecutar();
-    public String getSimbolo();
+    public void ejecutar(String textoBoton);
 }

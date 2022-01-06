@@ -15,14 +15,10 @@ public class ClickIgual implements Click{
     }
     
     @Override
-    public void ejecutar(){
+    public void ejecutar(String textoBoton){
         float numero2 = Float.parseFloat(display.getText());
         float resultado = operaciones.operar(numero2);
         display.setText("" + resultado);
     }
 
-    @Override
-    public String getSimbolo() {
-        return "=";
-    }
 }

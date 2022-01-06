@@ -2,21 +2,21 @@ package abstracto.presentacion;
 
 import abstracto.logica.Click;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 public class JButtonExt extends JButton{
     
     private final Click oprimir;
+    private final String texto;
     
-    public JButtonExt(Click oprimir, ActionListener actionListener){
+    public JButtonExt(String texto, Click oprimir){
         this.oprimir = oprimir;
-        setText(oprimir.getSimbolo());
+        this.texto = texto;
+        setText(texto);
         setFont(new Font("Tahoma", 0, 17));
-        addActionListener(actionListener);
     }
     
     public void ejecutar(){
-        oprimir.ejecutar();
+        oprimir.ejecutar(texto);
     }
 }

@@ -8,24 +8,18 @@ public class ClickOperador implements Click{
 
     private final IntDisplay display;
     private final Operaciones operaciones;
-    private final char operador;
 
-    public ClickOperador(char operador, IntDisplay display, Operaciones operaciones){
+    public ClickOperador(IntDisplay display, Operaciones operaciones){
         this.display = display;
         this.operaciones = operaciones;
-        this.operador = operador;
     }
     
     @Override
-    public void ejecutar(){
+    public void ejecutar(String textoBoton){
         float numero1 = Float.parseFloat(display.getText());
         operaciones.addOperando1(numero1);
-        operaciones.addOperandor(operador);
+        operaciones.addOperandor(textoBoton.charAt(0));
         display.setText("0");
     }
 
-    @Override
-    public String getSimbolo() {
-        return "" + operador;
-    }
 }
