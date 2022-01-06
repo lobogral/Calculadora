@@ -5,7 +5,7 @@ import abstracto.presentacion.JButtonExt;
 import concreto.click.ClickDigito;
 import concreto.click.ClickIgual;
 import concreto.click.ClickOperador;
-import concreto.click.ClickPunto;
+import concreto.click.ClickAC;
 import java.awt.GridLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -37,7 +37,7 @@ public class Launcher {
         ClickDigito clickDigito = new ClickDigito(lblDisplayExt);
         ClickOperador clickOperador = new ClickOperador(lblDisplayExt, operaciones);
         ClickIgual clickIgual = new ClickIgual(lblDisplayExt, operaciones);
-        ClickPunto clickPunto = new ClickPunto(lblDisplayExt);
+        ClickAC clickAC = new ClickAC(lblDisplayExt);
 
         int cont = 0;
         JButtonExt[] jButtonExts = new JButtonExt[16];
@@ -55,7 +55,7 @@ public class Launcher {
         jButtonExts[cont++] = new JButtonExt("-", clickOperador);
         jButtonExts[cont++] = new JButtonExt("=", clickIgual);
         jButtonExts[cont++] = new JButtonExt("0", clickDigito);
-        jButtonExts[cont++] = new JButtonExt(".", clickPunto);
+        jButtonExts[cont++] = new JButtonExt("AC", clickAC);
         jButtonExts[cont++] = new JButtonExt("+", clickOperador);
         
         Ventana ventana = new Ventana(lblDisplayExt.getLblDisplay(),
