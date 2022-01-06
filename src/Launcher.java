@@ -6,6 +6,9 @@ import concreto.click.ClickDigito;
 import concreto.click.ClickIgual;
 import concreto.click.ClickOperador;
 import concreto.click.ClickAC;
+import concreto.click.ClickDEL;
+import concreto.click.ClickOFF;
+import concreto.click.ClickPunto;
 import java.awt.GridLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,7 +33,9 @@ public class Launcher {
             System.out.println("No se puede implementar LookAndFeel");
         }
         
-        GridLayout gridLayout = new GridLayout(4, 4, 3, 3);
+        int filasGrid = 5;
+        int columnasGrid = 4;
+        GridLayout gridLayout = new GridLayout(filasGrid, columnasGrid, 3, 3);
         Operaciones operaciones = new Operaciones();
         LblDisplayExt lblDisplayExt = new LblDisplayExt();
         
@@ -38,25 +43,32 @@ public class Launcher {
         ClickOperador clickOperador = new ClickOperador(lblDisplayExt, operaciones);
         ClickIgual clickIgual = new ClickIgual(lblDisplayExt, operaciones);
         ClickAC clickAC = new ClickAC(lblDisplayExt);
+        ClickOFF clickOFF = new ClickOFF();
+        ClickPunto clickPunto = new ClickPunto(lblDisplayExt);
+        ClickDEL clickDEL = new ClickDEL(lblDisplayExt);
 
         int cont = 0;
-        JButtonExt[] jButtonExts = new JButtonExt[16];
+        JButtonExt[] jButtonExts = new JButtonExt[filasGrid*columnasGrid];
+        jButtonExts[cont++] = new JButtonExt("OFF", clickOFF);
+        jButtonExts[cont++] = new JButtonExt("DEL", clickDEL);
+        jButtonExts[cont++] = new JButtonExt("AC", clickAC);
+        jButtonExts[cont++] = new JButtonExt("/", clickOperador);
         jButtonExts[cont++] = new JButtonExt("7", clickDigito);
         jButtonExts[cont++] = new JButtonExt("8", clickDigito);
         jButtonExts[cont++] = new JButtonExt("9", clickDigito);
-        jButtonExts[cont++] = new JButtonExt("/", clickOperador);
+        jButtonExts[cont++] = new JButtonExt("*", clickOperador);
         jButtonExts[cont++] = new JButtonExt("4", clickDigito);
         jButtonExts[cont++] = new JButtonExt("5", clickDigito);
         jButtonExts[cont++] = new JButtonExt("6", clickDigito);
-        jButtonExts[cont++] = new JButtonExt("*", clickOperador);
+        jButtonExts[cont++] = new JButtonExt("-", clickOperador);
         jButtonExts[cont++] = new JButtonExt("1", clickDigito);
         jButtonExts[cont++] = new JButtonExt("2", clickDigito);
         jButtonExts[cont++] = new JButtonExt("3", clickDigito);
-        jButtonExts[cont++] = new JButtonExt("-", clickOperador);
-        jButtonExts[cont++] = new JButtonExt("=", clickIgual);
-        jButtonExts[cont++] = new JButtonExt("0", clickDigito);
-        jButtonExts[cont++] = new JButtonExt("AC", clickAC);
         jButtonExts[cont++] = new JButtonExt("+", clickOperador);
+        jButtonExts[cont++] = new JButtonExt("0", clickDigito);
+        jButtonExts[cont++] = new JButtonExt("00", clickDigito);
+        jButtonExts[cont++] = new JButtonExt(".", clickPunto);
+        jButtonExts[cont++] = new JButtonExt("=", clickIgual);
         
         Ventana ventana = new Ventana(lblDisplayExt.getLblDisplay(),
                                       gridLayout,

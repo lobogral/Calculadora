@@ -13,12 +13,13 @@ public class ClickDigito implements Click{
     
     @Override
     public void ejecutar(String textoBoton){
-        String digitoAgregado = display.getText();
-        if(digitoAgregado.equals("0")){                      
-            digitoAgregado = "";            
+        String numeroDisplay = display.getText();
+        if(numeroDisplay.equals("0")){                      
+            numeroDisplay = "";            
         }
-        digitoAgregado = digitoAgregado + textoBoton;
-        display.setText(digitoAgregado);
+        numeroDisplay = numeroDisplay + textoBoton;
+        String numDisplaySin0Izq = numeroDisplay.replaceAll("^0+", "0");
+        display.setText(numDisplaySin0Izq);
     }
 
 }
