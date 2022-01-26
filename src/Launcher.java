@@ -1,7 +1,7 @@
 import abstracto.presentacion.LblDisplayExt;
 import abstracto.presentacion.Ventana;
-import abstracto.logica.Operaciones;
 import abstracto.presentacion.JButtonExt;
+import abstracto.logica.Operacion;
 import concreto.click.ClickDigito;
 import concreto.click.ClickIgual;
 import concreto.click.ClickOperador;
@@ -9,9 +9,15 @@ import concreto.click.ClickAC;
 import concreto.click.ClickDEL;
 import concreto.click.ClickOFF;
 import concreto.click.ClickPunto;
+import concreto.operaciones.OpeDivision;
+import concreto.operaciones.OpeMultiplicacion;
+import concreto.operaciones.OpeResta;
+import concreto.operaciones.OpeSuma;
 import java.awt.GridLayout;
+import java.util.HashMap;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import abstracto.logica.Operador;
 
 
 public class Launcher {
@@ -35,13 +41,20 @@ public class Launcher {
         
         int filasGrid = 5;
         int columnasGrid = 4;
-        GridLayout gridLayout = new GridLayout(filasGrid, columnasGrid, 3, 3);
-        Operaciones operaciones = new Operaciones();
-        LblDisplayExt lblDisplayExt = new LblDisplayExt();
+        GridLayout gridLayout = new GridLayout(filasGrid, columnasGrid, 3, 3);       
         
+        HashMap<Character, Operador> operadores = new HashMap<>();
+        operadores.put('+', new OpeSuma());
+        operadores.put('-', new OpeResta());
+        operadores.put('*', new OpeMultiplicacion());
+        operadores.put('/', new OpeDivision());
+
+        Operacion operacion = new Operacion();
+        LblDisplayExt lblDisplayExt = new LblDisplayExt();
+
         ClickDigito clickDigito = new ClickDigito(lblDisplayExt);
-        ClickOperador clickOperador = new ClickOperador(lblDisplayExt, operaciones);
-        ClickIgual clickIgual = new ClickIgual(lblDisplayExt, operaciones);
+        ClickOperador clickOperador = new ClickOperador(lblDisplayExt, operacion, operadores);
+        ClickIgual clickIgual = new ClickIgual(lblDisplayExt, operacion);
         ClickAC clickAC = new ClickAC(lblDisplayExt);
         ClickOFF clickOFF = new ClickOFF();
         ClickPunto clickPunto = new ClickPunto(lblDisplayExt);

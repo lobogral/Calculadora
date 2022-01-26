@@ -1,24 +1,31 @@
 package concreto.click;
 
-import abstracto.logica.Operaciones;
+import abstracto.logica.Operacion;
 import abstracto.logica.IntDisplay;
 import abstracto.logica.Click;
+import abstracto.logica.Operador;
+import java.util.HashMap;
 
 public class ClickOperador implements Click{
 
     private final IntDisplay display;
-    private final Operaciones operaciones;
+    private final Operacion operacion;
+    private final HashMap<Character, Operador> operadores;
 
-    public ClickOperador(IntDisplay display, Operaciones operaciones){
+    public ClickOperador(IntDisplay display,
+                         Operacion operaciones,
+                         HashMap<Character, Operador> operadores){
         this.display = display;
-        this.operaciones = operaciones;
+        this.operacion = operaciones;
+        this.operadores = operadores;
     }
     
     @Override
     public void ejecutar(String textoBoton){
         float numero1 = Float.parseFloat(display.getText());
-        operaciones.addOperando1(numero1);
-        operaciones.addOperandor(textoBoton.charAt(0));
+        operacion.addOperando1(numero1);
+        char operador = textoBoton.charAt(0);
+        operacion.addOperandor(operadores.get(operador));
         display.setText("0");
     }
 

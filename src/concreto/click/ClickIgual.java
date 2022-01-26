@@ -1,23 +1,23 @@
 package concreto.click;
 
-import abstracto.logica.Operaciones;
+import abstracto.logica.Operacion;
 import abstracto.logica.IntDisplay;
 import abstracto.logica.Click;
 
 public class ClickIgual implements Click{
 
     private final IntDisplay display;
-    private final Operaciones operaciones;
+    private final Operacion operacion;
 
-    public ClickIgual(IntDisplay display, Operaciones operaciones){
+    public ClickIgual(IntDisplay display, Operacion operacion){
         this.display = display;
-        this.operaciones = operaciones;
+        this.operacion = operacion;
     }
     
     @Override
     public void ejecutar(String textoBoton){
         float numero2 = Float.parseFloat(display.getText());
-        float resultado = operaciones.operar(numero2);
+        float resultado = operacion.operar(numero2);
         display.setText("" + resultado);
     }
 
